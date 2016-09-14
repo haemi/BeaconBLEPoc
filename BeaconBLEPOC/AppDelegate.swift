@@ -22,23 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     private let locationManager = CLLocationManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-//        let application = UIApplication.sharedApplication()
-//        if let localNotifications = application.scheduledLocalNotifications {
-//            localNotifications.forEach { (notification) in
-//                application.cancelLocalNotification(notification)
-//            }
-//        }
-//
-//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         startBeaconMonitoring()
-//        setupBLE()
-//        LocalNotifications.sendLocalNotification()
         return true
     }
     
     private func startBeaconMonitoring() {
-        let _ = "ABABABBB-CC11-2222-5577-111111119999"
-        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
@@ -55,10 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func startScanning() {
         let uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
-        let _ = NSUUID(UUIDString: "ABABABBB-CC11-2222-5577-111111119999")
         let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "ESTIMOTE")
         locationManager.startMonitoringForRegion(beaconRegion)
-        print("start scanning")
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -88,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
 extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
     private func setupBLE() {
-//        centralManager = CBCentralManager(delegate: self, queue: nil)
         centralManager = CBCentralManager(delegate: self, queue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), options: [CBCentralManagerOptionRestoreIdentifierKey:"myCentralManagerIdentifier"])
     }
     
@@ -141,17 +126,7 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
         case .PoweredOn:
             message = "Bluetooth LE is turned on and ready for communication."
             
-//            _ = NSTimer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
-            
-            // Initiate Scan for Peripherals
-            //Option 1: Scan for all devices
-//            centralManager.scanForPeripheralsWithServices(nil, options: nil)
-            
-            // Option 2: Scan for devices that have the service you're interested in...
-//            let sensorTagAdvertisingUUID = CBUUID(string: "0003CBBB-0000-1000-8000-00805F9B0131")
-            let sensorTagAdvertisingUUID2 = CBUUID(string: "0003CAB5-0000-1000-8000-00805F9B0131")
             let sensorTagAdvertisingUUID3 = CBUUID(string: "0003cab5-0000-1000-8000-00805f9b0131")
-            print("Scanning for SensorTag adverstising with UUID: \(sensorTagAdvertisingUUID2)")
             centralManager.scanForPeripheralsWithServices([sensorTagAdvertisingUUID3], options: nil)
             LocalNotifications.sendLocalNotification("PoweredOn \(sensorTagAdvertisingUUID3)", shouldRepeat: false)
         }
