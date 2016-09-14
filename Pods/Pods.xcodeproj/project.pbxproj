@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2CCC4C82B68C2B9A5B0C080CCD7674FF /* VisitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5D3DB71A2ECEB5580CA113E060CCFE /* VisitRequest.swift */; };
+		3C189CBD0DFFBFB48FDDFE4131DB3785 /* GeoRegionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C0B874C4C3C68D4B4A3654D598B5F /* GeoRegionRequest.swift */; };
+		3E549C640FB5CFD3E07557D3A1CDBCFF /* BeaconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69DB4D328C3C9830E188C93E1362206 /* BeaconsManager.swift */; };
+		44FAA96E7833C3122B99156DF7D0120A /* BeaconAdvertiseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55E7F8E8C38F6B01AA1B7DB4F7519A /* BeaconAdvertiseRequest.swift */; };
+		44FFD4F7A5DE6319DA5C5797ABE78746 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938A42B87010FA0E882EFFEBAEB283B9 /* Commons.swift */; };
+		690AA20B4A3398A724F6CDFCA0C4D0A0 /* Pods-BeaconBLEPOC-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD653D0C6410D4E96C5A421D799BCDB /* Pods-BeaconBLEPOC-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E692795446E52675D0EA6271E4B4C6A /* HeadingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78737663141A23BEABDECC78E2D2F7D3 /* HeadingRequest.swift */; };
+		6F9B978CBAC1CD09F48675FDBFF368A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		74BC833E30D4ED4B909F634885BFBC25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		792B11BBF0B0DAE9A9A833E61C9DD64D /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E27055B723FE222F6E7308177993AEE /* LocationRequest.swift */; };
+		7BE0132F772F9CE3182CF884140E465D /* SwiftLocation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 538E08038F758277B17DB77FBA74F9E6 /* SwiftLocation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8943F2D68DB32006ADDB4499BDECB562 /* SwiftLocation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 158EEC9FB5387B2296CE12B971EEB63A /* SwiftLocation-dummy.m */; };
+		C8DC7FA0B125ECF6B9113FF351CC3CA2 /* BeaconRegionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BED0E1EBD15B44F6AD4A0E227A40B1 /* BeaconRegionRequest.swift */; };
+		CBF770949DB8FD9306E16D846C954C49 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F813ADFAE554808EC750FF2F69E072A8 /* LocationManager.swift */; };
+		E860DBC357DC79BAC72EF1167E0F6DA5 /* Pods-BeaconBLEPOC-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E24AA7545B3F5C54530D682CCCD1726E /* Pods-BeaconBLEPOC-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A8CD03039673A316E6CD6312E53F11D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 691B4BB4EF088339C7F023688BBC1AA1;
+			remoteInfo = SwiftLocation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		06D5E7D0802E19FFC9AC5306764E2396 /* SwiftLocation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-prefix.pch"; sourceTree = "<group>"; };
+		152BC8FD1ADFC708AC883213A35D8171 /* Pods-BeaconBLEPOC-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BeaconBLEPOC-resources.sh"; sourceTree = "<group>"; };
+		158EEC9FB5387B2296CE12B971EEB63A /* SwiftLocation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftLocation-dummy.m"; sourceTree = "<group>"; };
+		20EED7133526C451799BEC585F02F336 /* Pods-BeaconBLEPOC-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BeaconBLEPOC-frameworks.sh"; sourceTree = "<group>"; };
+		3B55E7F8E8C38F6B01AA1B7DB4F7519A /* BeaconAdvertiseRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeaconAdvertiseRequest.swift; path = src/BeaconAdvertiseRequest.swift; sourceTree = "<group>"; };
+		3D1AAC3EC7569979EEB475DAB59A773A /* SwiftLocation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftLocation.modulemap; sourceTree = "<group>"; };
+		4C8E6E81A6087DA090F7BF772B4C6F34 /* SwiftLocation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLocation.xcconfig; sourceTree = "<group>"; };
+		502D9A9438081C75522100C76637228E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		538E08038F758277B17DB77FBA74F9E6 /* SwiftLocation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-umbrella.h"; sourceTree = "<group>"; };
+		6B70CD03EFE98813FA190889EB3BF24F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E27055B723FE222F6E7308177993AEE /* LocationRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationRequest.swift; path = src/LocationRequest.swift; sourceTree = "<group>"; };
+		78737663141A23BEABDECC78E2D2F7D3 /* HeadingRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeadingRequest.swift; path = src/HeadingRequest.swift; sourceTree = "<group>"; };
+		7F14D8F41120E0F28571458AACA4840A /* Pods-BeaconBLEPOC.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BeaconBLEPOC.modulemap"; sourceTree = "<group>"; };
+		88C9DA1C8F58CDE31D46C580469EC445 /* Pods-BeaconBLEPOC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BeaconBLEPOC.debug.xcconfig"; sourceTree = "<group>"; };
+		938A42B87010FA0E882EFFEBAEB283B9 /* Commons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Commons.swift; path = src/Commons.swift; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AEBA9AE45C02087A2D96228C6C81DC82 /* Pods-BeaconBLEPOC-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BeaconBLEPOC-acknowledgements.plist"; sourceTree = "<group>"; };
+		B3BED0E1EBD15B44F6AD4A0E227A40B1 /* BeaconRegionRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeaconRegionRequest.swift; path = src/BeaconRegionRequest.swift; sourceTree = "<group>"; };
+		BEAB6812B56C9EDB17C15A39FED35CCA /* SwiftLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDBD4337680E8ECB007D95542142675 /* Pods-BeaconBLEPOC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BeaconBLEPOC.release.xcconfig"; sourceTree = "<group>"; };
+		CAD653D0C6410D4E96C5A421D799BCDB /* Pods-BeaconBLEPOC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BeaconBLEPOC-umbrella.h"; sourceTree = "<group>"; };
+		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DE5D3DB71A2ECEB5580CA113E060CCFE /* VisitRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VisitRequest.swift; path = src/VisitRequest.swift; sourceTree = "<group>"; };
+		E24AA7545B3F5C54530D682CCCD1726E /* Pods-BeaconBLEPOC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BeaconBLEPOC-dummy.m"; sourceTree = "<group>"; };
+		E69DB4D328C3C9830E188C93E1362206 /* BeaconsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeaconsManager.swift; path = src/BeaconsManager.swift; sourceTree = "<group>"; };
+		EC49C78C8FFC9440DE7B72B6DF34C125 /* Pods_BeaconBLEPOC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeaconBLEPOC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1D3523B3973565C55FE313EE1718C2B /* Pods-BeaconBLEPOC-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BeaconBLEPOC-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F813ADFAE554808EC750FF2F69E072A8 /* LocationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = src/LocationManager.swift; sourceTree = "<group>"; };
+		FA8C0B874C4C3C68D4B4A3654D598B5F /* GeoRegionRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoRegionRequest.swift; path = src/GeoRegionRequest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DE789E62DF5C1971FF964E87F54BCAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F9B978CBAC1CD09F48675FDBFF368A9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49355220A8FFFCF2D4AC5173B86CF5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74BC833E30D4ED4B909F634885BFBC25 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6373C9BA877FDB4ADAFD3564718F9167 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B7D8DE1EEB64F9F8233C600DFE629FD6 /* Pods-BeaconBLEPOC */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		6D15D2C28DA48B2576C19EA1FA36B094 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E63209BB1B0B625D91CCE1B92892676 /* SwiftLocation */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7B2029A5C00E27C05BABCCDB356C87FC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				502D9A9438081C75522100C76637228E /* Info.plist */,
+				3D1AAC3EC7569979EEB475DAB59A773A /* SwiftLocation.modulemap */,
+				4C8E6E81A6087DA090F7BF772B4C6F34 /* SwiftLocation.xcconfig */,
+				158EEC9FB5387B2296CE12B971EEB63A /* SwiftLocation-dummy.m */,
+				06D5E7D0802E19FFC9AC5306764E2396 /* SwiftLocation-prefix.pch */,
+				538E08038F758277B17DB77FBA74F9E6 /* SwiftLocation-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLocation";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				6D15D2C28DA48B2576C19EA1FA36B094 /* Pods */,
+				BFDB9928BBF2ED8F633674101B62BE29 /* Products */,
+				6373C9BA877FDB4ADAFD3564718F9167 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7E63209BB1B0B625D91CCE1B92892676 /* SwiftLocation */ = {
+			isa = PBXGroup;
+			children = (
+				3B55E7F8E8C38F6B01AA1B7DB4F7519A /* BeaconAdvertiseRequest.swift */,
+				B3BED0E1EBD15B44F6AD4A0E227A40B1 /* BeaconRegionRequest.swift */,
+				E69DB4D328C3C9830E188C93E1362206 /* BeaconsManager.swift */,
+				938A42B87010FA0E882EFFEBAEB283B9 /* Commons.swift */,
+				FA8C0B874C4C3C68D4B4A3654D598B5F /* GeoRegionRequest.swift */,
+				78737663141A23BEABDECC78E2D2F7D3 /* HeadingRequest.swift */,
+				F813ADFAE554808EC750FF2F69E072A8 /* LocationManager.swift */,
+				6E27055B723FE222F6E7308177993AEE /* LocationRequest.swift */,
+				DE5D3DB71A2ECEB5580CA113E060CCFE /* VisitRequest.swift */,
+				7B2029A5C00E27C05BABCCDB356C87FC /* Support Files */,
+			);
+			path = SwiftLocation;
+			sourceTree = "<group>";
+		};
+		B7D8DE1EEB64F9F8233C600DFE629FD6 /* Pods-BeaconBLEPOC */ = {
+			isa = PBXGroup;
+			children = (
+				6B70CD03EFE98813FA190889EB3BF24F /* Info.plist */,
+				7F14D8F41120E0F28571458AACA4840A /* Pods-BeaconBLEPOC.modulemap */,
+				F1D3523B3973565C55FE313EE1718C2B /* Pods-BeaconBLEPOC-acknowledgements.markdown */,
+				AEBA9AE45C02087A2D96228C6C81DC82 /* Pods-BeaconBLEPOC-acknowledgements.plist */,
+				E24AA7545B3F5C54530D682CCCD1726E /* Pods-BeaconBLEPOC-dummy.m */,
+				20EED7133526C451799BEC585F02F336 /* Pods-BeaconBLEPOC-frameworks.sh */,
+				152BC8FD1ADFC708AC883213A35D8171 /* Pods-BeaconBLEPOC-resources.sh */,
+				CAD653D0C6410D4E96C5A421D799BCDB /* Pods-BeaconBLEPOC-umbrella.h */,
+				88C9DA1C8F58CDE31D46C580469EC445 /* Pods-BeaconBLEPOC.debug.xcconfig */,
+				BEDBD4337680E8ECB007D95542142675 /* Pods-BeaconBLEPOC.release.xcconfig */,
+			);
+			name = "Pods-BeaconBLEPOC";
+			path = "Target Support Files/Pods-BeaconBLEPOC";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFDB9928BBF2ED8F633674101B62BE29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC49C78C8FFC9440DE7B72B6DF34C125 /* Pods_BeaconBLEPOC.framework */,
+				BEAB6812B56C9EDB17C15A39FED35CCA /* SwiftLocation.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		65F8F4C3D059FFB3A36EF57FBD6A5FB8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690AA20B4A3398A724F6CDFCA0C4D0A0 /* Pods-BeaconBLEPOC-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		681311A0380A14A301580989C82F1E69 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE0132F772F9CE3182CF884140E465D /* SwiftLocation-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		46BA6439915EBBDC1D3BDD5D9EFBAD7D /* Pods-BeaconBLEPOC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8707CE8D8B144BA1B712F384A5D318F0 /* Build configuration list for PBXNativeTarget "Pods-BeaconBLEPOC" */;
+			buildPhases = (
+				C1246F9B0B2C00267316DC3A351B495A /* Sources */,
+				3DE789E62DF5C1971FF964E87F54BCAF /* Frameworks */,
+				65F8F4C3D059FFB3A36EF57FBD6A5FB8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AD0F9ED6DAB8A5E3F162206DB8F716E /* PBXTargetDependency */,
+			);
+			name = "Pods-BeaconBLEPOC";
+			productName = "Pods-BeaconBLEPOC";
+			productReference = EC49C78C8FFC9440DE7B72B6DF34C125 /* Pods_BeaconBLEPOC.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		691B4BB4EF088339C7F023688BBC1AA1 /* SwiftLocation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A45FEFE205AC7E39F7ED79BE6C3B6D31 /* Build configuration list for PBXNativeTarget "SwiftLocation" */;
+			buildPhases = (
+				848BE2540974A3AB4119EF60446870DE /* Sources */,
+				B49355220A8FFFCF2D4AC5173B86CF5C /* Frameworks */,
+				681311A0380A14A301580989C82F1E69 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftLocation;
+			productName = SwiftLocation;
+			productReference = BEAB6812B56C9EDB17C15A39FED35CCA /* SwiftLocation.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = BFDB9928BBF2ED8F633674101B62BE29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				46BA6439915EBBDC1D3BDD5D9EFBAD7D /* Pods-BeaconBLEPOC */,
+				691B4BB4EF088339C7F023688BBC1AA1 /* SwiftLocation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		848BE2540974A3AB4119EF60446870DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44FAA96E7833C3122B99156DF7D0120A /* BeaconAdvertiseRequest.swift in Sources */,
+				C8DC7FA0B125ECF6B9113FF351CC3CA2 /* BeaconRegionRequest.swift in Sources */,
+				3E549C640FB5CFD3E07557D3A1CDBCFF /* BeaconsManager.swift in Sources */,
+				44FFD4F7A5DE6319DA5C5797ABE78746 /* Commons.swift in Sources */,
+				3C189CBD0DFFBFB48FDDFE4131DB3785 /* GeoRegionRequest.swift in Sources */,
+				6E692795446E52675D0EA6271E4B4C6A /* HeadingRequest.swift in Sources */,
+				CBF770949DB8FD9306E16D846C954C49 /* LocationManager.swift in Sources */,
+				792B11BBF0B0DAE9A9A833E61C9DD64D /* LocationRequest.swift in Sources */,
+				8943F2D68DB32006ADDB4499BDECB562 /* SwiftLocation-dummy.m in Sources */,
+				2CCC4C82B68C2B9A5B0C080CCD7674FF /* VisitRequest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1246F9B0B2C00267316DC3A351B495A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E860DBC357DC79BAC72EF1167E0F6DA5 /* Pods-BeaconBLEPOC-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AD0F9ED6DAB8A5E3F162206DB8F716E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLocation;
+			target = 691B4BB4EF088339C7F023688BBC1AA1 /* SwiftLocation */;
+			targetProxy = A8CD03039673A316E6CD6312E53F11D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		397EFCB06807F037C3E7439DD020B146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEDBD4337680E8ECB007D95542142675 /* Pods-BeaconBLEPOC.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-BeaconBLEPOC/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BeaconBLEPOC/Pods-BeaconBLEPOC.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_BeaconBLEPOC;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		42287DDF97330524BA3EF220F0276DA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		436E5254B774E50B140EC59A16185C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8E6E81A6087DA090F7BF772B4C6F34 /* SwiftLocation.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftLocation/SwiftLocation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftLocation/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftLocation/SwiftLocation.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftLocation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7AAA9FE6004110B0F09E957F9A4AB7B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88C9DA1C8F58CDE31D46C580469EC445 /* Pods-BeaconBLEPOC.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-BeaconBLEPOC/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BeaconBLEPOC/Pods-BeaconBLEPOC.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_BeaconBLEPOC;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A5358D44FDECEC3D9A7DD94E64278453 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8E6E81A6087DA090F7BF772B4C6F34 /* SwiftLocation.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftLocation/SwiftLocation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftLocation/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftLocation/SwiftLocation.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftLocation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AE9439C22469D35336242DD983DB5C5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE9439C22469D35336242DD983DB5C5F /* Debug */,
+				42287DDF97330524BA3EF220F0276DA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8707CE8D8B144BA1B712F384A5D318F0 /* Build configuration list for PBXNativeTarget "Pods-BeaconBLEPOC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AAA9FE6004110B0F09E957F9A4AB7B3 /* Debug */,
+				397EFCB06807F037C3E7439DD020B146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A45FEFE205AC7E39F7ED79BE6C3B6D31 /* Build configuration list for PBXNativeTarget "SwiftLocation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436E5254B774E50B140EC59A16185C99 /* Debug */,
+				A5358D44FDECEC3D9A7DD94E64278453 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

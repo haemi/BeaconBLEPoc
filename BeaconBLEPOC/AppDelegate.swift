@@ -7,40 +7,193 @@
 //
 
 import UIKit
+import CoreLocation
+import CoreBluetooth
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    
     var window: UIWindow?
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    private var centralManager:CBCentralManager!
+    private var sensorTag:CBPeripheral?
+    private let timerPauseInterval:NSTimeInterval = 10.0
+    private let timerScanInterval:NSTimeInterval = 2.0
+    private let sensorTagName = "SensorTagName"
+    private let locationManager = CLLocationManager()
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+//        let application = UIApplication.sharedApplication()
+//        if let localNotifications = application.scheduledLocalNotifications {
+//            localNotifications.forEach { (notification) in
+//                application.cancelLocalNotification(notification)
+//            }
+//        }
+//
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        startBeaconMonitoring()
+//        setupBLE()
+//        LocalNotifications.sendLocalNotification()
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    private func startBeaconMonitoring() {
+        let _ = "ABABABBB-CC11-2222-5577-111111119999"
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedAlways {
+            if CLLocationManager.isMonitoringAvailableForClass(CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    startScanning()
+                }
+            }
+        }
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    func startScanning() {
+        let uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
+        let _ = NSUUID(UUIDString: "ABABABBB-CC11-2222-5577-111111119999")
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "ESTIMOTE")
+        locationManager.startMonitoringForRegion(beaconRegion)
+        print("start scanning")
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
+        LocalNotifications.sendLocalNotification("66", shouldRepeat: false)
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    func locationManager(manager: CLLocationManager, rangingBeaconsDidFailForRegion region: CLBeaconRegion, withError error: NSError) {
+        print(error)
+        LocalNotifications.sendLocalNotification("71", shouldRepeat: false)
     }
-
-
+    
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        LocalNotifications.sendLocalNotification("enter", shouldRepeat: false)
+        setupBLE()
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        LocalNotifications.sendLocalNotification("exit ", shouldRepeat: false)
+    }
+    
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print(error)
+        LocalNotifications.sendLocalNotification("85", shouldRepeat: false)
+    }
 }
 
+extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
+    private func setupBLE() {
+//        centralManager = CBCentralManager(delegate: self, queue: nil)
+        centralManager = CBCentralManager(delegate: self, queue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), options: [CBCentralManagerOptionRestoreIdentifierKey:"myCentralManagerIdentifier"])
+    }
+    
+    func centralManager(central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
+        LocalNotifications.sendLocalNotification("\(dict)", shouldRepeat: false)
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+        LocalNotifications.sendLocalNotification("100", shouldRepeat: false)
+        guard let services = peripheral.services else {
+            return
+        }
+        
+        for service in services {
+            peripheral.discoverCharacteristics(nil, forService: service)
+        }
+        LocalNotifications.sendLocalNotification("108", shouldRepeat: false)
+        print(peripheral.services)
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+        guard let characteristics = service.characteristics else {
+            return
+        }
+        
+        for characteristic in characteristics {
+            peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+        }
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        LocalNotifications.sendLocalNotification("123", shouldRepeat: false)
+        print(characteristic)
+    }
+    
+    func centralManagerDidUpdateState(central: CBCentralManager) {
+        var message = ""
+        
+        switch central.state {
+        case .PoweredOff:
+            message = "Bluetooth on this device is currently powered off."
+        case .Unsupported:
+            message = "This device does not support Bluetooth Low Energy."
+        case .Unauthorized:
+            message = "This app is not authorized to use Bluetooth Low Energy."
+        case .Resetting:
+            message = "The BLE Manager is resetting; a state update is pending."
+        case .Unknown:
+            message = "The state of the BLE Manager is unknown."
+        case .PoweredOn:
+            message = "Bluetooth LE is turned on and ready for communication."
+            
+//            _ = NSTimer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
+            
+            // Initiate Scan for Peripherals
+            //Option 1: Scan for all devices
+//            centralManager.scanForPeripheralsWithServices(nil, options: nil)
+            
+            // Option 2: Scan for devices that have the service you're interested in...
+//            let sensorTagAdvertisingUUID = CBUUID(string: "0003CBBB-0000-1000-8000-00805F9B0131")
+            let sensorTagAdvertisingUUID2 = CBUUID(string: "0003CAB5-0000-1000-8000-00805F9B0131")
+            let sensorTagAdvertisingUUID3 = CBUUID(string: "0003cab5-0000-1000-8000-00805f9b0131")
+            print("Scanning for SensorTag adverstising with UUID: \(sensorTagAdvertisingUUID2)")
+            centralManager.scanForPeripheralsWithServices([sensorTagAdvertisingUUID3], options: nil)
+            LocalNotifications.sendLocalNotification("PoweredOn \(sensorTagAdvertisingUUID3)", shouldRepeat: false)
+        }
+        
+        print(message)
+    }
+    
+    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(advertisementData[CBAdvertisementDataLocalNameKey])\" \(peripheral.name) - \(advertisementData)")
+        LocalNotifications.sendLocalNotification("found something", shouldRepeat: false)
+        
+        // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
+        if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
+            print("NEXT PERIPHERAL NAME: \(peripheralName)")
+            print("NEXT PERIPHERAL UUID: \(peripheral.identifier.UUIDString)")
+            
+            if peripheralName == sensorTagName {
+                LocalNotifications.sendLocalNotification("**** SENSOR TAG FOUND! ADDING NOW!!!", shouldRepeat: false)
+                print("SENSOR TAG FOUND! ADDING NOW!!!")
+                // to save power, stop scanning for other devices
+                
+                // save a reference to the sensor tag
+                sensorTag = peripheral
+                sensorTag!.delegate = self
+                
+                // Request a connection to the peripheral
+                centralManager.connectPeripheral(sensorTag!, options: nil)
+            }
+        }
+    }
+    
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        LocalNotifications.sendLocalNotification("\(error)", shouldRepeat: false)
+    }
+
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        LocalNotifications.sendLocalNotification("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!", shouldRepeat: false)
+        
+        // Now that we've successfully connected to the SensorTag, let's discover the services.
+        // - NOTE:  we pass nil here to request ALL services be discovered.
+        //          If there was a subset of services we were interested in, we could pass the UUIDs here.
+        //          Doing so saves battery life and saves time.
+        peripheral.discoverServices(nil)
+    }
+}
