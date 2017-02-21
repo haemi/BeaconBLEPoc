@@ -9,139 +9,193 @@
 import UIKit
 import CoreLocation
 import CoreBluetooth
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     
     var window: UIWindow?
-    private var centralManager:CBCentralManager!
-    private var sensorTag:CBPeripheral?
-    private let timerPauseInterval:NSTimeInterval = 10.0
-    private let timerScanInterval:NSTimeInterval = 2.0
-    private let sensorTagName = "SensorTagName"
-    private let locationManager = CLLocationManager()
+    fileprivate var centralManager:CBCentralManager!
+    fileprivate var sensorTag:CBPeripheral?
+    fileprivate let timerPauseInterval:TimeInterval = 10.0
+    fileprivate let timerScanInterval:TimeInterval = 2.0
+    fileprivate let sensorTagName = "momenz2"
+    fileprivate let locationManager = CLLocationManager()
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    fileprivate var peripheral: CBPeripheral?
+    fileprivate var isGrantedNotificationAccess = false
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            self.isGrantedNotificationAccess = granted
+        }
+        
         startBeaconMonitoring()
+        // setupBLE()
         return true
     }
     
-    private func startBeaconMonitoring() {
+    fileprivate func startBeaconMonitoring() {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
-
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedAlways {
-            if CLLocationManager.isMonitoringAvailableForClass(CLBeaconRegion.self) {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
                     startScanning()
                 }
             }
         }
     }
-
+    
     func startScanning() {
-        let uuid = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
+        let uuid = UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
         let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "ESTIMOTE")
-        locationManager.startMonitoringForRegion(beaconRegion)
+        locationManager.startMonitoring(for: beaconRegion)
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         LocalNotifications.sendLocalNotification("66", shouldRepeat: false)
     }
     
-    func locationManager(manager: CLLocationManager, rangingBeaconsDidFailForRegion region: CLBeaconRegion, withError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
         print(error)
         LocalNotifications.sendLocalNotification("71", shouldRepeat: false)
     }
     
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         LocalNotifications.sendLocalNotification("enter", shouldRepeat: false)
         setupBLE()
     }
     
-    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         LocalNotifications.sendLocalNotification("exit ", shouldRepeat: false)
     }
     
-    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print(error)
         LocalNotifications.sendLocalNotification("85", shouldRepeat: false)
     }
 }
 
 extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
-    private func setupBLE() {
-        centralManager = CBCentralManager(delegate: self, queue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), options: [CBCentralManagerOptionRestoreIdentifierKey:"myCentralManagerIdentifier"])
+    fileprivate func setupBLE() {
+        centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.global(qos: .default), options: [CBCentralManagerOptionRestoreIdentifierKey:"myCentralManagerIdentifier"])
     }
     
-    func centralManager(central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         LocalNotifications.sendLocalNotification("\(dict)", shouldRepeat: false)
     }
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         LocalNotifications.sendLocalNotification("100", shouldRepeat: false)
         guard let services = peripheral.services else {
             return
         }
         
         for service in services {
-            peripheral.discoverCharacteristics(nil, forService: service)
+            let cbUUID = CBUUID(string: "0003CBB1-0000-1000-8000-00805F9B0131")
+            peripheral.discoverCharacteristics([cbUUID], for: service)
         }
         LocalNotifications.sendLocalNotification("108", shouldRepeat: false)
-        print(peripheral.services)
     }
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+    func getRandomColor() -> UIColor{
+        
+        let randomRed:CGFloat = CGFloat(drand48())
+        let randomGreen:CGFloat = CGFloat(drand48())
+        let randomBlue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+        
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else {
             return
         }
         
         for characteristic in characteristics {
-            peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+            peripheral.setNotifyValue(true, for: characteristic)
+            
+            for _ in 0...100 {
+                var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+                getRandomColor().getRed(&r, green: &g, blue: &b, alpha: &a)
+                r = r * 255
+                g = g * 255
+                b = b * 255
+                let bytes: [UInt8] = [UInt8(r), UInt8(g), UInt8(b)]
+                let data = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
+                peripheral.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
+                usleep(100000)
+            }
+            let bytes: [UInt8] = [0, 0, 0]
+            let data = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
+            peripheral.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
+            centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        print("didupdatenotificationforstate")
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         LocalNotifications.sendLocalNotification("123", shouldRepeat: false)
         print(characteristic)
     }
     
-    func centralManagerDidUpdateState(central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
         var message = ""
         
         switch central.state {
-        case .PoweredOff:
+        case .poweredOff:
             message = "Bluetooth on this device is currently powered off."
-        case .Unsupported:
+        case .unsupported:
             message = "This device does not support Bluetooth Low Energy."
-        case .Unauthorized:
+        case .unauthorized:
             message = "This app is not authorized to use Bluetooth Low Energy."
-        case .Resetting:
+        case .resetting:
             message = "The BLE Manager is resetting; a state update is pending."
-        case .Unknown:
+        case .unknown:
             message = "The state of the BLE Manager is unknown."
-        case .PoweredOn:
+        case .poweredOn:
             message = "Bluetooth LE is turned on and ready for communication."
+            LocalNotifications.sendLocalNotification("PoweredOn", shouldRepeat: false)
             
-            let sensorTagAdvertisingUUID3 = CBUUID(string: "0003cab5-0000-1000-8000-00805f9b0131")
-            centralManager.scanForPeripheralsWithServices([sensorTagAdvertisingUUID3], options: nil)
-            LocalNotifications.sendLocalNotification("PoweredOn \(sensorTagAdvertisingUUID3)", shouldRepeat: false)
+            // centralManager.scanForPeripheralsWithServices(nil, options: nil)
+            if let nsuuid1 = UUID(uuidString: "A97E74F4-0714-44B3-9A2C-06A141A18B4D") {
+                print("here we are")
+                let peripherals = centralManager.retrievePeripherals(withIdentifiers: [nsuuid1])
+                
+                for p in peripherals {
+                    peripheral = p
+                    print("and here as well")
+                    centralManager.connect(p, options: nil)
+                }
+            }
+            
+            //            centralManager.scanForPeripheralsWithServices([sensorTagAdvertisingUUID1, sensorTagAdvertisingUUID2, sensorTagAdvertisingUUID3], options: nil)
         }
         
         print(message)
     }
-    
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(advertisementData[CBAdvertisementDataLocalNameKey])\" \(peripheral.name) - \(advertisementData)")
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        LocalNotifications.sendLocalNotification("background", shouldRepeat: false)
+    }
+
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(String(describing: advertisementData[CBAdvertisementDataLocalNameKey]))\" \(String(describing: peripheral.name)) - \(advertisementData)")
         LocalNotifications.sendLocalNotification("found something", shouldRepeat: false)
         
         // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
         if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
-            print("NEXT PERIPHERAL UUID: \(peripheral.identifier.UUIDString)")
+            print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             
             if peripheralName == sensorTagName {
                 LocalNotifications.sendLocalNotification("**** SENSOR TAG FOUND! ADDING NOW!!!", shouldRepeat: false)
@@ -153,22 +207,26 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
                 sensorTag!.delegate = self
                 
                 // Request a connection to the peripheral
-                centralManager.connectPeripheral(sensorTag!, options: nil)
+                centralManager.connect(sensorTag!, options: nil)
             }
         }
     }
     
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        LocalNotifications.sendLocalNotification("\(error)", shouldRepeat: false)
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        LocalNotifications.sendLocalNotification("\(String(describing: error))", shouldRepeat: false)
     }
-
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("connected")
         LocalNotifications.sendLocalNotification("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!", shouldRepeat: false)
         
         // Now that we've successfully connected to the SensorTag, let's discover the services.
         // - NOTE:  we pass nil here to request ALL services be discovered.
         //          If there was a subset of services we were interested in, we could pass the UUIDs here.
         //          Doing so saves battery life and saves time.
-        peripheral.discoverServices(nil)
+        self.peripheral = peripheral
+        self.peripheral?.delegate = self
+        let serviceUUID = CBUUID(string: "0003CBBB-0000-1000-8000-00805F9B0131")
+        self.peripheral?.discoverServices([serviceUUID])
     }
 }

@@ -1,5 +1,6 @@
-![SwiftLocation](https://raw.githubusercontent.com/malcommac/SwiftLocation/master/logo.png)
-
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/malcommac/SwiftLocation/master/swiflocation-logo.png" width=240px height=241px alt="SwiftLocation" title="SwiftLocation">
+</p>
 
 SwiftLocation
 =============
@@ -14,12 +15,14 @@ SwiftLocation
 SwiftLocation is a lightweight library you can use to monitor locations, make reverse geocoding (both with Apple and Google's services) monitor beacons and do beacon advertising.
 It's really easy to use and it's compatible both with Swift 2.2, 2.3 and 3.0.
 
+★★ Star our GitHub repository to help us! ★★
+
 Pick the right version:
 
 - **Swift 3.0** is in master (and develop) (CocoaPods Tag >= 1.0.6)
-- Old **Swift 2.2** branch is [here](https://github.com/malcommac/SwiftLocation/tree/swift-2.2). (CocoaPods Tag = 1.0.5)
-- Old **Swift 2.3** branch is [here](https://github.com/malcommac/SwiftLocation/tree/feature/swift2.3).
-- Old **Swift 2.0** branch is [here](https://github.com/malcommac/SwiftLocation/tree/swift-2.0)
+- Old/Unsupported **Swift 2.2** branch is [here](https://github.com/malcommac/SwiftLocation/tree/swift-2.2). (CocoaPods Tag = 1.0.5)
+- Old/Unsupported **Swift 2.3** branch is [here](https://github.com/malcommac/SwiftLocation/tree/feature/swift2.3).
+- Old/Unsupported **Swift 2.0** branch is [here](https://github.com/malcommac/SwiftLocation/tree/swift-2.0)
 
 Main features includes:
 
@@ -81,7 +84,7 @@ Location.getLocation(withAccuracy: .Block, frequency: .OneShot, timeout: 50, onS
 }) { (lastValidLocation, error) in
 }
 // Sometimes in the future
-request.stop() // Stop receiving updates
+request.cancel() // Stop receiving updates
 request.pause() // Temporary pause events
 request.start() // Restart a paused request
 ```
@@ -288,7 +291,7 @@ Keep in mind: advertising not works in background.
 let request = Beacons.advertise(beaconName: "name", UUID: proximity, major: major, minor: minor, powerRSSI: 4, serviceUUIDs: [])
 ```
 
-Use ```stop()``` on ```request``` to stop beacon advertise.
+Use ```cancel()``` on ```request``` to stop beacon advertise.
 
 ([Documentation ↑](#documentation))
 
@@ -370,6 +373,7 @@ Swift Versions:
 
 - **Swift 2.2** ```pod 'SwiftLocation', '1.0.5'```
 - **Swift 3** ```pod 'SwiftLocation', '>= 1.0.6'```
+- **Swift 2.3** ```pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git', :branch => 'feature/swift2.3'```
 
 Then, run the following command:
 
