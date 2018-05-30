@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         startBeaconMonitoring()
-        // setupBLE()
+//        setupBLE()
         return true
     }
     
@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func startScanning() {
-        let uuid = UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "ESTIMOTE")
+        let uuid = UUID(uuidString: "2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6")!
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "momenz2")
         locationManager.startMonitoring(for: beaconRegion)
     }
     
@@ -97,8 +97,9 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         
         for service in services {
-            let cbUUID = CBUUID(string: "0003CBB1-0000-1000-8000-00805F9B0131")
-            peripheral.discoverCharacteristics([cbUUID], for: service)
+            let characteristics = CBUUID(string: "0003CAA1-0000-1000-8000-00805F9B0131")
+            peripheral.discoverCharacteristics([characteristics], for: service)
+//            peripheral.discoverCharacteristics(nil, for: service)
         }
         LocalNotifications.sendLocalNotification("108", shouldRepeat: false)
     }
@@ -117,25 +118,15 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
         guard let characteristics = service.characteristics else {
             return
         }
-        
+
         for characteristic in characteristics {
-            peripheral.setNotifyValue(true, for: characteristic)
-            
-            for _ in 0...100 {
-                var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-                getRandomColor().getRed(&r, green: &g, blue: &b, alpha: &a)
-                r = r * 255
-                g = g * 255
-                b = b * 255
-                let bytes: [UInt8] = [UInt8(r), UInt8(g), UInt8(b)]
-                let data = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
-                peripheral.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
-                usleep(100000)
+            if characteristic.isWriteCharacteristic() {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "bluetooth"), object: nil)
+            } else if characteristic.isReadCharacteristic() {
+                print("characteristic", characteristic.uuid.uuidString, service.uuid.uuidString)
+                peripheral.setNotifyValue(true, for: characteristic)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "bluetooth"), object: nil)
             }
-            let bytes: [UInt8] = [0, 0, 0]
-            let data = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
-            peripheral.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
-            centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
@@ -189,26 +180,10 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(String(describing: advertisementData[CBAdvertisementDataLocalNameKey]))\" \(String(describing: peripheral.name)) - \(advertisementData)")
-        LocalNotifications.sendLocalNotification("found something", shouldRepeat: false)
-        
-        // Retrieve the peripheral name from the advertisement data using the "kCBAdvDataLocalName" key
-        if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
-            print("NEXT PERIPHERAL NAME: \(peripheralName)")
-            print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
-            
-            if peripheralName == sensorTagName {
-                LocalNotifications.sendLocalNotification("**** SENSOR TAG FOUND! ADDING NOW!!!", shouldRepeat: false)
-                print("SENSOR TAG FOUND! ADDING NOW!!!")
-                // to save power, stop scanning for other devices
-                
-                // save a reference to the sensor tag
-                sensorTag = peripheral
-                sensorTag!.delegate = self
-                
-                // Request a connection to the peripheral
-                centralManager.connect(sensorTag!, options: nil)
-            }
+
+        if peripheral.isMomenzz() {
+            self.peripheral = peripheral
+            centralManager.connect(peripheral, options: nil)
         }
     }
     
@@ -226,7 +201,7 @@ extension AppDelegate: CBCentralManagerDelegate, CBPeripheralDelegate {
         //          Doing so saves battery life and saves time.
         self.peripheral = peripheral
         self.peripheral?.delegate = self
-        let serviceUUID = CBUUID(string: "0003CBBB-0000-1000-8000-00805F9B0131")
+        let serviceUUID = CBUUID(string: "0003CAB5-0000-1000-8000-00805F9B0131")
         self.peripheral?.discoverServices([serviceUUID])
     }
 }

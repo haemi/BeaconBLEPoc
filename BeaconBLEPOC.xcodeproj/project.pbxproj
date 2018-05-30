@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9AC0DD53310B1684A6689E9B /* Pods_BeaconBLEPOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0315C71B8E25CA618F6B95 /* Pods_BeaconBLEPOC.framework */; };
+		F83651D71E5C2D3F008B5DBD /* BluetoothExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83651D61E5C2D3F008B5DBD /* BluetoothExtensions.swift */; };
 		F8983CE31D89287C00776077 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8983CE21D89287C00776077 /* AppDelegate.swift */; };
 		F8983CE51D89287C00776077 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8983CE41D89287C00776077 /* ViewController.swift */; };
 		F8983CE81D89287C00776077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8983CE61D89287C00776077 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		0A0315C71B8E25CA618F6B95 /* Pods_BeaconBLEPOC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeaconBLEPOC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE20D7E9C98B367FE6BF4FD1 /* Pods-BeaconBLEPOC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconBLEPOC.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconBLEPOC/Pods-BeaconBLEPOC.release.xcconfig"; sourceTree = "<group>"; };
+		F83651D61E5C2D3F008B5DBD /* BluetoothExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothExtensions.swift; sourceTree = "<group>"; };
 		F8983CDF1D89287C00776077 /* BeaconBLEPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconBLEPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8983CE21D89287C00776077 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8983CE41D89287C00776077 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				F8983CEB1D89287C00776077 /* LaunchScreen.storyboard */,
 				F8983CEE1D89287C00776077 /* Info.plist */,
 				F8983CF41D892C5900776077 /* LocalNotifications.swift */,
+				F83651D61E5C2D3F008B5DBD /* BluetoothExtensions.swift */,
 			);
 			path = BeaconBLEPOC;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			files = (
 				F8983CF51D892C5900776077 /* LocalNotifications.swift in Sources */,
 				F8983CE51D89287C00776077 /* ViewController.swift in Sources */,
+				F83651D71E5C2D3F008B5DBD /* BluetoothExtensions.swift in Sources */,
 				F8983CE31D89287C00776077 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
